@@ -1,0 +1,20 @@
+__pycache__/
+*.pyc
+.venv/
+env/
+.ipynb_checkpoints/
+.DS_Store
+
+# model/data artifacts
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+
+shared/
+teacher/
+
+# if student contains downloaded model weights
+student/**/model.safetensors
+student/**/.msc

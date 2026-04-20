@@ -1,0 +1,15 @@
+Project: LLaVA Teacher-Student Distillation
+
+Teacher model:
+/home/idekube/models/._____temp/swift/llava-1.5-7b-hf
+
+Student model:
+TO BE DEFINED
+
+Current status:
+- Teacher found
+- Student multimodal model not yet available
+- Project structure initialized
+
+Goal:
+Compare a large multimodal teacher with a smaller multimodal student inspired by LLaVA-KD.
