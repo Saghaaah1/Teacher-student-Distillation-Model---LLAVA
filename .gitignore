@@ -5,14 +5,22 @@ env/
 .ipynb_checkpoints/
 .DS_Store
 
-# large model/data files
+# model weights / checkpoints
 *.safetensors
 *.bin
 *.pt
 *.pth
 *.ckpt
 
-shared/
+# downloaded model folders
 teacher/
-student/**/.msc
-student/**/model.safetensors
+shared/
+student/qwen2.5-0.5b/
+
+# cache / temporary files
+*.log
+*.tmp
+.msc/
+**/.msc
+.cache/
+student/qwen2.5-0.5b/
