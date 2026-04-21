@@ -5,7 +5,7 @@ env/
 .ipynb_checkpoints/
 .DS_Store
 
-# model/data artifacts
+# large model/data files
 *.safetensors
 *.bin
 *.pt
@@ -14,7 +14,5 @@ env/
 
 shared/
 teacher/
-
-# if student contains downloaded model weights
-student/**/model.safetensors
 student/**/.msc
+student/**/model.safetensors
