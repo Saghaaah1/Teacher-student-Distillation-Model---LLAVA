@@ -11,6 +11,10 @@ import torch
 import torch.nn as nn
 from transformers import CLIPVisionModel, CLIPVisionConfig, AutoModelForCausalLM
 
+import torch_npu  # noqa: F401 — registers npu backend
+
+DEVICE = torch.device("npu:0" if torch.npu.is_available() else "cpu")
+
 
 TEACHER_PATH   = "/home/idekube/models/swift/llava-1___5-7b-hf"
 TINYLLAMA_PATH = "/home/idekube/models/AI-ModelScope/TinyLlama-1___1B-Chat-v1___0"
@@ -190,16 +194,17 @@ class StudentLLaVA(nn.Module):
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    model = StudentLLaVA(freeze_vision=True, freeze_llm=True)
+    print(f"Using device: {DEVICE}")
+    model = StudentLLaVA(freeze_vision=True, freeze_llm=True).to(DEVICE)
     model.print_param_summary()
 
     B = 1
-    pixel_values = torch.randn(B, 3, 336, 336)
-    input_ids    = torch.randint(0, 32000, (B, 10))
-    attn_mask    = torch.ones(B, 10, dtype=torch.long)
+    pixel_values = torch.randn(B, 3, 336, 336).to(DEVICE)
+    input_ids    = torch.randint(0, 32000, (B, 10)).to(DEVICE)
+    attn_mask    = torch.ones(B, 10, dtype=torch.long).to(DEVICE)
 
     with torch.no_grad():
         out = model(pixel_values, input_ids, attn_mask)
 
-    print(f"Logits shape        : {out.logits.shape}")
-    print(f"Hidden states count : {len(out.hidden_states)}")
+    print(f"Logits shape : {out.logits.shape}")
+    print(f"Device       : {out.logits.device}")
